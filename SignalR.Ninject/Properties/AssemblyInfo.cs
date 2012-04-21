@@ -8,5 +8,6 @@
 [assembly: AssemblyCompany("David Fowler, Damian Edwards")]
 [assembly: AssemblyCopyright("Copyright © David Fowler and Damian Edwards 2011")]
 
-[assembly: AssemblyVersion("0.4.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.5.0.0")]
+[assembly: AssemblyFileVersion("0.5.0.0")]
+[assembly: AssemblyInformationalVersion("0.5.0-pre")]
