@@ -9,11 +9,13 @@
         <TestResultsPath>$(ArtifactsDir)\TestResults</TestResultsPath>
         <NuGetToolsPath>$(ProjectRoot)\.nuget</NuGetToolsPath>
         <NuGetExePath>$(NuGetToolsPath)\nuget.exe</NuGetExePath>
+        <PrereleaseTagWithSeparator Condition="$(PrereleaseTag) != ''">-$(PrereleaseTag)</PrereleaseTagWithSeparator>
     </PropertyGroup>
   
     <PropertyGroup>
         <MajorVersion>0</MajorVersion>
         <MinorVersion>5</MinorVersion>
+        <PackageBuild>0</PackageBuild>
     </PropertyGroup>
   
     <PropertyGroup Condition="$(BUILD_NUMBER) != ''">
@@ -30,9 +32,9 @@
         <Revision>0</Revision>
     </PropertyGroup>
   
-    <PropertyGroup>  
+    <PropertyGroup>
        <Version>$(MajorVersion).$(MinorVersion).$(Revision).$(Build)</Version>
-       <PackageVersion>$(MajorVersion).$(MinorVersion).$(Revision)-pre</PackageVersion>
+       <PackageVersion>$(MajorVersion).$(MinorVersion).$(PackageBuild)$(PrereleaseTagWithSeparator)</PackageVersion>
     </PropertyGroup>
   
     <ItemGroup>
@@ -41,8 +43,8 @@
             <ReplaceWith>$(Version)</ReplaceWith>
         </RegexTransform>
         <RegexTransform Include="$(ProjectRoot)\**\AssemblyInfo.cs">
-            <Find>\d+\.\d+\.\d+-pre</Find>
-            <ReplaceWith>$(PackageVersion)</ReplaceWith>
+            <Find>AssemblyInformationalVersion\("\d+\.\d+\.\d+.\d+"\)</Find>
+            <ReplaceWith>AssemblyInformationalVersion("$(PackageVersion)")</ReplaceWith>
         </RegexTransform>
     </ItemGroup>
     
